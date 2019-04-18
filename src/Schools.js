@@ -52,7 +52,9 @@ class Schools extends Component {
                       <small className="">
                         <button
                           className="btn btn-sm"
-                          onClick={() => this.props.deleteSchool(school)}
+                          onClick={() =>
+                            this.props.deleteSchool(school, this.props.students)
+                          }
                           type="button"
                         >
                           <Link className="text-muted">delete</Link>
@@ -87,7 +89,7 @@ const mapStateToProps = ({ students, schools }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteSchool: school => dispatch(deleteSchool(school))
+    deleteSchool: (school, students) => dispatch(deleteSchool(school, students))
   };
 };
 

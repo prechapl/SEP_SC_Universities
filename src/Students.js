@@ -1,17 +1,24 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { deleteStudent } from './store';
+import { deleteStudent, fetchStudents, fetchSchools } from './store';
 
 class Students extends Component {
+  componentDidMount() {
+    this.props.fetchStudents().catch(ex => console.log(ex));
+    this.props.fetchSchools().catch(ex => console.log(ex));
+  }
+
   studentAttends = schoolId => {
-    return this.props.schools.filter(school => school.id === schoolId)[0].name;
+    if (schoolId) {
+      return this.props.schools.filter(school => school.id === schoolId)[0]
+        .name;
+    }
   };
 
-  // if there's time I will add a sort by schoool feature:
-  // filterBySchool = school => {
+  // schoolsExists = schoolId => {
   //   return this.props.students.filter(
-  //     student => student.schoolId === school.id
+  //     student => student.schoolId === schoolId
   //   );
   // };
 
@@ -55,7 +62,11 @@ class Students extends Component {
                     </Link>
                   </td>
 
-                  <td>{this.studentAttends(student.schoolId)}</td>
+                  <td>
+                    {student
+                      ? this.studentAttends(student.schoolId)
+                      : 'does not exist'}
+                  </td>
                   <td>{student.email}</td>
 
                   <td>{student.gpa}</td>
@@ -95,7 +106,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    deleteStudent: student => dispatch(deleteStudent(student))
+    deleteStudent: student => dispatch(deleteStudent(student)),
+    fetchStudents: () => dispatch(fetchStudents()),
+    fetchSchools: () => dispatch(fetchSchools())
   };
 };
 

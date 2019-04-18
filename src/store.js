@@ -104,9 +104,24 @@ export const updateSchool = school => {
       .then(() => dispatch(fetchSchools()));
   };
 };
+// export const deleteStudents = (school, students) => {
+//   return dispatch => {
+//     students
+//       .filter(s => s.schoolId !== school.id)
+//       .map(st => {
+//         return deleteStudent(st);
+//       })
+//       .then(() => dispatch(fetchStudents()));
+//   };
+// };
 
-export const deleteSchool = school => {
+export const deleteSchool = (school, students) => {
   return dispatch => {
+    students
+      .filter(s => s.schoolId === school.id)
+      .map(st => {
+        return deleteStudent(st);
+      });
     return axios
       .delete(`/api/schools/${school.id}`)
       .then(() => dispatch(fetchSchools()));

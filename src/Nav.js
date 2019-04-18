@@ -7,7 +7,7 @@ export default class Nav extends Component {
 
     return (
       <nav className="navbar sticky-top navbar-light bg-white mt-3">
-        <a className="navBar-brand d-flex flex-row">
+        <div className="navBar-brand d-flex flex-row">
           <img
             src="http://i65.tinypic.com/14133p0.png"
             className="d-inline-block mb-1 mr-md-3 img-fluid"
@@ -16,7 +16,7 @@ export default class Nav extends Component {
           <h1 className="ml-2" style={{ fontFamily: 'meatball, sans-serif' }}>
             South Carolina Universities
           </h1>
-        </a>
+        </div>
 
         <ul className="nav">
           {links.map(link => (
