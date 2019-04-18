@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { deleteSchool } from './store';
 
 class Schools extends Component {
@@ -12,13 +12,13 @@ class Schools extends Component {
     return (
       <Fragment>
         <ul className="container">
-          <div className="row d-flex flex-wrap">
+          <div className="row d-flex flex-wrap col-12 justify-content-center">
             {this.props.schools.map(school => {
               return (
                 <li
                   key={school.id}
-                  className="card  rounded-lg shadow m-3 mb-5 bg-white rounded"
-                  style={{ width: '15rem' }}
+                  className="card  rounded-lg shadow m-3 bg-white rounded"
+                  style={{ width: '14rem' }}
                 >
                   <img
                     className="card-img-top p-1"
@@ -55,7 +55,7 @@ class Schools extends Component {
                           onClick={() => this.props.deleteSchool(school)}
                           type="button"
                         >
-                          delete
+                          <Link className="text-muted">delete</Link>
                         </button>
                       </small>
                       <button className="btn btn-sm" type="button">

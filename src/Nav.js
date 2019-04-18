@@ -13,7 +13,7 @@ export default class Nav extends Component {
             className="d-inline-block mb-1 mr-md-3 img-fluid"
             alt="Loading..."
           />
-          <h1 className="ml-2" style={{ fontFamily: 'meatball' }}>
+          <h1 className="ml-2" style={{ fontFamily: 'meatball, sans-serif' }}>
             South Carolina Universities
           </h1>
         </a>

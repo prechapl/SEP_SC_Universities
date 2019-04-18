@@ -50,7 +50,7 @@ const seedSchools = [
     streetAddress: '171 Moultrie St, Charleston, SC',
     cityState: 'Charleston, SC',
     blurb:
-      'The Citadel is a state-supported, comprehensive military college located in Charleston, South Carolina.',
+      'The Citadel is a state-supported military college located in Charleston, South Carolina.',
     description:
       'The Citadel, also known as The Military College of South Carolina, is located near the Ashley River, just a 10-minute drive from downtown Charleston. Undergraduate Citadel students enroll as the South Carolina Corps of Cadets and thus follow stricter codes than students at other types of schools. Students of any age may not have alcohol on campus and must live in dormitories all four years. There are no fraternities or sororities, and more than 90 percent of students are male.',
     tuition: 'In-state $12,516 , Out-of-state $33,869',
@@ -80,7 +80,7 @@ const seedSchools = [
     streetAddress: '100 Chanticleer Dr',
     cityState: ' Conway, SC',
     blurb:
-      'Coastal Carolina University is a public liberal arts university located near the Myrtle Beach metropolitan area.',
+      'Coastal Carolina University is a public liberal arts university located near Myrtle Beach.',
     description:
       "Coastal Carolina University offers baccalaureate degrees in 73 major fields of study. Among CCU's graduate-level programs are 25 master's degrees, two educational specialist degrees, and two doctoral programs: the Ph.D. in marine science: coastal and marine systems science, and the Ph.D. in education. The most popular undergraduate majors are marine science, management, exercise and sport science, and communication. CCU boasts a growing array of internship, research and international opportunities for students, as well as numerous online programs through Coastal Online.",
     tuition: '$15,000',

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Students from './Students';
 import Student from './Student';

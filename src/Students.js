@@ -8,6 +8,7 @@ class Students extends Component {
     return this.props.schools.filter(school => school.id === schoolId)[0].name;
   };
 
+  // if there's time I will add a sort by schoool feature:
   // filterBySchool = school => {
   //   return this.props.students.filter(
   //     student => student.schoolId === school.id

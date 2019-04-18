@@ -35,7 +35,7 @@ class StudentForm extends Component {
     const student = { ...this.state };
     const samePaths =
       this.props.match.path === this.props.history.location.pathname;
-    console.log(this.props.match.path === this.props.history.location.pathname);
+
     if (samePaths) {
       this.props
         .saveStudent(student)
@@ -66,7 +66,10 @@ class StudentForm extends Component {
 
     return (
       <Fragment>
-        <form onSubmit={this.handleSubmit}>
+        <form
+          className="d-flex flex-column col-9 form-group mx-auto"
+          onSubmit={this.handleSubmit}
+        >
           {error.length ? (
             <div className="alert alert-danger" role="alert">
               {error}
