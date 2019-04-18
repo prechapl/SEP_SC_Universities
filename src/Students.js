@@ -16,12 +16,6 @@ class Students extends Component {
     }
   };
 
-  // schoolsExists = schoolId => {
-  //   return this.props.students.filter(
-  //     student => student.schoolId === schoolId
-  //   );
-  // };
-
   render() {
     return (
       <Fragment>

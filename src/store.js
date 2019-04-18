@@ -104,16 +104,6 @@ export const updateSchool = school => {
       .then(() => dispatch(fetchSchools()));
   };
 };
-// export const deleteStudents = (school, students) => {
-//   return dispatch => {
-//     students
-//       .filter(s => s.schoolId !== school.id)
-//       .map(st => {
-//         return deleteStudent(st);
-//       })
-//       .then(() => dispatch(fetchStudents()));
-//   };
-// };
 
 export const deleteSchool = (school, students) => {
   return dispatch => {
