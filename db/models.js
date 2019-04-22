@@ -63,7 +63,6 @@ const Student = conn.define("student", {
 });
 
 Student.belongsTo(School);
-// School.belongsTo(Student);
 
 module.exports = {
   School,
