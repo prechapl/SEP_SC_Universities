@@ -18,7 +18,6 @@ class Students extends Component {
   render() {
     const students = this.props.students;
     const schools = this.props.schools;
-    console.log("props.students in Students -render()", this.props.students);
     return (
       <Fragment>
         <h4 className="d-flex mt-1 justify-content-center"> Students </h4>
@@ -60,7 +59,6 @@ class Students extends Component {
                       </td>
                       {schools.find(sch => sch.id === student.schoolId).name}
 
-                      {/* <td>{this.studentAttends(student, schools)}</td> */}
                       <td>{student.email}</td>
 
                       <td>{student.gpa}</td>

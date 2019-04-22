@@ -12,13 +12,9 @@ class Schools extends Component {
     if (this.props.schools.length !== prevProps.schools.length) {
       this.props.fetchStudents();
     }
-    console.log("props.schools in Schools-cdu", this.props.schools);
   }
-
   render() {
     const students = this.props.students;
-    const schools = this.props.schools;
-    console.log("props.schools in Schools-render()", schools);
     return (
       <Fragment>
         <ul className="container">
