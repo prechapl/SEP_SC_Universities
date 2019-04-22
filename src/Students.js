@@ -1,28 +1,30 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { deleteStudent, fetchStudents, fetchSchools } from './store';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { deleteStudent, fetchStudents, fetchSchools } from "./store";
 
 class Students extends Component {
   componentDidMount() {
-    this.props.fetchStudents().catch(ex => console.log(ex));
     this.props.fetchSchools().catch(ex => console.log(ex));
+    this.props.fetchStudents().catch(ex => console.log(ex));
   }
 
-  studentAttends = schoolId => {
-    if (schoolId) {
-      return this.props.schools.filter(school => school.id === schoolId)[0]
-        .name;
+  componentDidUpdate(prevProps) {
+    if (this.props.schools.length !== prevProps.schools.length) {
+      this.props.fetchStudents();
     }
-  };
+  }
 
   render() {
+    const students = this.props.students;
+    const schools = this.props.schools;
+    console.log("props.students in Students -render()", this.props.students);
     return (
       <Fragment>
         <h4 className="d-flex mt-1 justify-content-center"> Students </h4>
         <table className="table table-sm m-3">
           <thead
-            style={{ backgroundColor: '#205286' }}
+            style={{ backgroundColor: "#205286" }}
             className="font-weight-light"
           >
             <tr className="text-white ">
@@ -37,53 +39,54 @@ class Students extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.students.map(student => {
-              return (
-                <tr key={student.id}>
-                  <th scope="row">{student.id}</th>
-                  <td>
-                    <img
-                      className="img-thumbnail"
-                      style={{ width: '75px' }}
-                      src={student.image}
-                      border="0"
-                      alt="loading..."
-                    />
-                  </td>
-                  <td>
-                    <Link to={`/students/${student.id}`}>
-                      {student.firstName} {student.lastName}
-                    </Link>
-                  </td>
+            {students !== undefined
+              ? students.map(student => {
+                  return (
+                    <tr key={student.id}>
+                      <th scope="row">{student.id}</th>
+                      <td>
+                        <img
+                          className="img-thumbnail"
+                          style={{ width: "75px" }}
+                          src={student.image}
+                          border="0"
+                          alt="loading..."
+                        />
+                      </td>
+                      <td>
+                        <Link to={`/students/${student.id}`}>
+                          {student.firstName} {student.lastName}
+                        </Link>
+                      </td>
+                      {schools.find(sch => sch.id === student.schoolId).name}
 
-                  <td>
-                    {student
-                      ? this.studentAttends(student.schoolId)
-                      : 'does not exist'}
-                  </td>
-                  <td>{student.email}</td>
+                      {/* <td>{this.studentAttends(student, schools)}</td> */}
+                      <td>{student.email}</td>
 
-                  <td>{student.gpa}</td>
-                  <td>
-                    <button
-                      type="submit"
-                      className="btn btn-outline-primary btn-sm"
-                    >
-                      <Link to={`/students/update/${student.id}`}>Edit</Link>
-                    </button>
-                  </td>
-                  <td>
-                    <button
-                      type="submit"
-                      onClick={() => this.props.deleteStudent(student)}
-                      className="btn btn-outline-danger btn-sm"
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
+                      <td>{student.gpa}</td>
+                      <td>
+                        <button
+                          type="submit"
+                          className="btn btn-outline-primary btn-sm"
+                        >
+                          <Link to={`/students/update/${student.id}`}>
+                            Edit
+                          </Link>
+                        </button>
+                      </td>
+                      <td>
+                        <button
+                          type="submit"
+                          onClick={() => this.props.deleteStudent(student)}
+                          className="btn btn-outline-danger btn-sm"
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })
+              : null}
           </tbody>
         </table>
       </Fragment>

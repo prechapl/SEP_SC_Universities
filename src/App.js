@@ -1,21 +1,16 @@
-import React, { Component, Fragment } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Students from './Students';
-import Student from './Student';
-import Schools from './Schools';
-import School from './School';
-import SchoolForm from './SchoolForm';
-import StudentForm from './StudentForm';
-import Nav from './Nav';
-import Invalid from './Invalid';
-import { fetchSchools, fetchStudents } from './store';
+import React, { Component, Fragment } from "react";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import Students from "./Students";
+import Student from "./Student";
+import Schools from "./Schools";
+import School from "./School";
+import SchoolForm from "./SchoolForm";
+import StudentForm from "./StudentForm";
+import Nav from "./Nav";
+import Invalid from "./Invalid";
 
 class App extends Component {
-  componentDidMount() {
-    this.props.fetchSchools().catch(ex => console.log(ex));
-    this.props.fetchStudents().catch(ex => console.log(ex));
-  }
   render() {
     return (
       <Fragment>
@@ -39,13 +34,6 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchStudents: () => dispatch(fetchStudents()),
-    fetchSchools: () => dispatch(fetchSchools())
-  };
-};
-
 const mapStateToProps = state => {
   return {
     students: state.students,
@@ -53,7 +41,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps)(App);

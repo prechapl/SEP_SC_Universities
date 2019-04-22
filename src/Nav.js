@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 export default class Nav extends Component {
   render() {
     const pathname = location.pathname;
-    const links = ['/schools', '/students', '/addSchool', '/addStudent'];
+    const links = ["/schools", "/students", "/addSchool", "/addStudent"];
 
     return (
       <nav className="navbar sticky-top navbar-light bg-white mt-3">
@@ -13,7 +13,7 @@ export default class Nav extends Component {
             className="d-inline-block mb-1 mr-md-3 img-fluid"
             alt="Loading..."
           />
-          <h1 className="ml-2" style={{ fontFamily: 'meatball, sans-serif' }}>
+          <h1 className="ml-2" style={{ fontFamily: "meatball, sans-serif" }}>
             South Carolina Universities
           </h1>
         </div>
@@ -24,14 +24,12 @@ export default class Nav extends Component {
               <Link
                 to={link}
                 className={`nav-link text-secondary ${
-                  link === pathname ? ' active' : ''
+                  link === pathname ? " active" : ""
                 }`}
               >
-                <p>
-                  <a href="#" className="text-secondary">
-                    {link.slice(1)}
-                  </a>
-                </p>
+                <span href="#" className="text-secondary">
+                  {link.slice(1)}
+                </span>
               </Link>
             </li>
           ))}

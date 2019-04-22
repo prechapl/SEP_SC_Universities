@@ -1,14 +1,24 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { deleteSchool } from './store';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import { deleteSchool, fetchStudents, fetchSchools } from "./store";
 
 class Schools extends Component {
-  handleRedirect = school => {
-    return <Link to={`/schools/update/${school.id}`} />;
-  };
+  componentDidMount() {
+    this.props.fetchSchools().catch(ex => console.log(ex));
+    this.props.fetchStudents().catch(ex => console.log(ex));
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.schools.length !== prevProps.schools.length) {
+      this.props.fetchStudents();
+    }
+    console.log("props.schools in Schools-cdu", this.props.schools);
+  }
 
   render() {
+    const students = this.props.students;
+    const schools = this.props.schools;
+    console.log("props.schools in Schools-render()", schools);
     return (
       <Fragment>
         <ul className="container">
@@ -18,7 +28,7 @@ class Schools extends Component {
                 <li
                   key={school.id}
                   className="card  rounded-lg shadow m-3 bg-white rounded"
-                  style={{ width: '14rem' }}
+                  style={{ width: "14rem" }}
                 >
                   <img
                     className="card-img-top p-1"
@@ -51,13 +61,15 @@ class Schools extends Component {
                       </small>
                       <small className="">
                         <button
+                          type="button"
                           className="btn btn-sm"
                           onClick={() =>
-                            this.props.deleteSchool(school, this.props.students)
+                            this.props.deleteSchool(school, students)
                           }
-                          type="button"
                         >
-                          <Link className="text-muted">delete</Link>
+                          <Link to="#" className="text-muted">
+                            delete
+                          </Link>
                         </button>
                       </small>
                       <button className="btn btn-sm" type="button">
@@ -89,6 +101,8 @@ const mapStateToProps = ({ students, schools }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    fetchSchools: () => dispatch(fetchSchools()),
+    fetchStudents: () => dispatch(fetchStudents()),
     deleteSchool: (school, students) => dispatch(deleteSchool(school, students))
   };
 };

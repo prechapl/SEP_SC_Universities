@@ -1,7 +1,7 @@
-const sequelize = require('sequelize');
-const conn = require('./conn');
+const sequelize = require("sequelize");
+const conn = require("./conn");
 
-const School = conn.define('school', {
+const School = conn.define("school", {
   name: {
     type: sequelize.STRING,
     validate: {
@@ -36,7 +36,7 @@ const School = conn.define('school', {
   typicalSAT: sequelize.STRING
 });
 
-const Student = conn.define('student', {
+const Student = conn.define("student", {
   firstName: {
     type: sequelize.STRING,
     validate: {
@@ -63,6 +63,7 @@ const Student = conn.define('student', {
 });
 
 Student.belongsTo(School);
+// School.belongsTo(Student);
 
 module.exports = {
   School,

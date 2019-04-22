@@ -1,10 +1,10 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import thunk from 'redux-thunk';
-import axios from 'axios';
+import { createStore, applyMiddleware, combineReducers } from "redux";
+import thunk from "redux-thunk";
+import axios from "axios";
 
 //action types
-const GET_STUDENTS = 'GET_STUDENTS';
-const GET_SCHOOLS = 'GET_SCHOOLS';
+const GET_STUDENTS = "GET_STUDENTS";
+const GET_SCHOOLS = "GET_SCHOOLS";
 
 //action creators
 const getStudents = students => {
@@ -51,7 +51,7 @@ const reducer = combineReducers({
 export const fetchStudents = () => {
   return dispatch => {
     return axios
-      .get('/api/students')
+      .get("/api/students")
       .then(res => res.data)
       .then(students => dispatch(getStudents(students)));
   };
@@ -60,7 +60,7 @@ export const fetchStudents = () => {
 export const saveStudent = student => {
   return dispatch => {
     return axios
-      .post('/api/students/', student)
+      .post("/api/students/", student)
       .then(() => dispatch(fetchStudents()));
   };
 };
@@ -84,7 +84,7 @@ export const deleteStudent = student => {
 export const fetchSchools = () => {
   return dispatch => {
     return axios
-      .get('/api/schools')
+      .get("/api/schools")
       .then(res => res.data)
       .then(schools => dispatch(getSchools(schools)));
   };
@@ -93,7 +93,7 @@ export const fetchSchools = () => {
 export const saveSchool = school => {
   return dispatch => {
     return axios
-      .post('/api/schools/', school)
+      .post("/api/schools/", school)
       .then(() => dispatch(fetchSchools()));
   };
 };
@@ -107,14 +107,14 @@ export const updateSchool = school => {
 
 export const deleteSchool = (school, students) => {
   return dispatch => {
-    students
-      .filter(s => s.schoolId === school.id)
-      .map(st => {
-        return deleteStudent(st);
-      });
-    return axios
-      .delete(`/api/schools/${school.id}`)
-      .then(() => dispatch(fetchSchools()));
+    return Promise.all([
+      axios.delete(`/api/schools/${school.id}`),
+      students
+        .filter(s => s.schoolId === school.id)
+        .map(st => {
+          return axios.delete(`/api/students/${st.id}`);
+        }).schoolId
+    ]).then(() => dispatch(fetchSchools()));
   };
 };
 
